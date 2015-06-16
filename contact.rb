@@ -1,4 +1,4 @@
-Class Contact
+class Contact
 	attr_accessor :first_name, :last_name, :email, :notes
 
 	def initialize(first_name, last_name, email, notes)
