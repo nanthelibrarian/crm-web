@@ -9,3 +9,7 @@ get '/contacts' do
 	erb :contacts
 end
 
+get '/add_contacts' do	
+	erb :add_contacts
+end
+
