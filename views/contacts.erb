@@ -9,7 +9,7 @@
 	<h1>All Contacts</h1>
 	<p>View contacts in the list below</p>
 	<ul>
-	<%	@contacts.each do |contact| %>
+	<%	$rolodex.contacts.each do |contact| %>
 	<li><%= contact.first_name %> <%= contact.last_name %></li>
 	<% end %>
 	</ul>
