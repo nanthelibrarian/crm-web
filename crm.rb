@@ -1,6 +1,7 @@
 require_relative 'rolodex'
 require_relative 'contact'
 require 'sinatra'
+require 'sinatra/reloader'
 
 $rolodex= Rolodex.new 
 
@@ -17,6 +18,15 @@ get '/contacts' do
 	# @contacts << Contact.new("Nancy", "Wood", "nancy@librarian.com", "the librarian")
 
 	erb :contacts
+	# - find contacts.erb
+	# - is there layout.erb
+	# 	- start rendering layout.erb
+	# 		-when we get yield
+	# 			-start rendering contacts.erb
+	# 	-finish rendering layout.erb
+	# - send it to the user
+	
+
 end
 
 get '/contacts/new' do	

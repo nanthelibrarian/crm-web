@@ -1,20 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Document</title>
-</head>
-<body>
-	<header>This CRM is for NANCY</header>
-	<nav>
-		<ul>
-			<li><a href="/contacts">View all contacts</a></li>
-			<li><a href="/contacts/new">Add contacts</a></li>
-			<li><a href="/contacts/edit">Edit contacts</a></li>
-			<li><a href="/contacts/delete">Delete contacts</a></li>
-		</ul>
-	</nav>
-	<%= yield %>
-	<footer>Created in the year 2015 during the month of June</footer>
-</body>
+	<head>
+		<link rel="stylesheet" type="text/css" href="/style.css" />
+		<meta charset="UTF-8">
+		<title>Document</title>
+	</head>
+	<body>
+
+		<div class="airplane">
+			<header> 
+				<h1>Client Relationship Management System</h1>
+			</header> 
+		</div>
+		
+		<div class="container">
+			<div class="bar">
+				<nav>
+					<ul>
+						<li><a href="/contacts">View all contacts</a></li>
+						<li><a href="/contacts/new">Add contacts</a></li>
+						<li><a href="/contacts/edit">Edit contacts</a></li>
+						<li><a href="/contacts/delete">Delete contacts</a></li>
+					</ul>
+				</nav>
+			</div>
+			
+			<div class="grounded">
+					<%= yield %>
+			</div>
+		</div>
+
+		<div class="bass">
+			<footer>Created in the year 2015 during the month of June</footer>
+		</div>
+
+	</body>
 </html>

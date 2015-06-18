@@ -1,0 +1,76 @@
+html {
+background-color: #E4F1FB;
+font-family: Helvetica;
+}
+
+.airplane {
+   width: 100%; 
+   height:150px;
+   background-color: #BFAF80;
+   padding-left: 50px;
+   padding-top: 50px;
+}
+
+.bar {
+	display: inline-block;
+/*	width: 250px;
+*/}
+
+/*nav {
+	height: 10px; 
+	padding: 10px;
+	background-color: transparent;
+	display: block;
+}
+*/
+.grounded {
+/*	display: inline-block;
+*/	width: 500px;
+	height: 50px;
+}
+
+h1 {
+	color: #260126;
+	font-size: 24px;
+	margin-top: 12px;	 
+}
+
+h2 {
+	color: #260126;
+	font-size: 18px;
+	background-color: transparent	
+}
+
+
+p {
+	color: blue;
+}
+
+body {
+	
+}
+
+ul {
+	display: inline-block;
+	list-style: none;
+}
+
+li {
+	display: inline-block;
+	color: #0D083B;
+	margin: 10px;
+	float: left;
+	padding-right: 50px;
+}
+
+
+.bass {
+	position: fixed;
+	bottom: 2px;
+	clear: both;
+	text-align: center;
+	width: 100%;
+}
+
+.content {
+}
