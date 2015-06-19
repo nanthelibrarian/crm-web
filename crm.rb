@@ -2,8 +2,9 @@ require_relative 'rolodex'
 require_relative 'contact'
 require 'sinatra'
 require 'sinatra/reloader'
+require 'data_mapper'
 
-# DataMapper.setup(:default, 'sqlite:crm_development.sqlite')
+DataMapper.setup(:default, 'sqlite3:database.sqlite3')
 
 # Class Contact
 # include DataMapper::Resource
