@@ -44,9 +44,13 @@ get '/contacts/new' do
 	erb :new_contact
 end
 
-get "/contacts/1000" do
-  @contact = $rolodex.find(1000)
-  erb :show_contact
+get "/contacts/:id" do
+  @contact = $rolodex.find(params[:id].to_i)
+  if @contact
+    erb :show_contact
+  else
+    raise Sinatra::NotFound
+end
 end
 
 post '/contacts' do
@@ -54,4 +58,3 @@ post '/contacts' do
   $rolodex.add_contact(new_contact)
   redirect to('/contacts')
 end
-
