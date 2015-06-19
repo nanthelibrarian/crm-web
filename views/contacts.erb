@@ -2,6 +2,7 @@
 <p>View contacts in the list below</p>
 <ul>
 <%	$rolodex.contacts.each do |contact| %>
-<li><%= contact.first_name %> <%= contact.last_name %><a href="/contacts/<%=contact.id%>/edit">Edit contact</a></li>
+<li><%= contact.first_name %> <%= contact.last_name %><a href="/contacts/<%=contact.id%>/edit">Edit contact</a><a href="/contacts/<%=contact.id%>/delete">Delete contact</a></li>
+
 <% end %>
 </ul>
