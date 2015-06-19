@@ -36,8 +36,6 @@ get '/contacts' do
 	# 			-start rendering contacts.erb
 	# 	-finish rendering layout.erb
 	# - send it to the user
-
-
 end
 
 get '/contacts/new' do	
@@ -51,6 +49,29 @@ get "/contacts/:id" do
   else
     raise Sinatra::NotFound
 end
+end
+
+get "/contacts/:id/edit" do
+  @contact = $rolodex.find(params[:id].to_i)
+  if @contact
+    erb :edit_contact
+  else
+    raise Sinatra::NotFound
+  end
+end
+
+put "/contacts/:id" do
+  @contact = $rolodex.find(params[:id].to_i)
+  if @contact
+    @contact.first_name = params[:first_name]
+    @contact.last_name = params[:last_name]
+    @contact.email = params[:email]
+    @contact.notes = params[:notes]
+
+    redirect to("/contacts")
+  else
+    raise Sinatra::NotFound
+  end
 end
 
 post '/contacts' do
