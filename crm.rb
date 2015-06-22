@@ -66,14 +66,12 @@ get '/contacts/new' do
 end
 
 get "/contacts/:id" do
-
-	# @contact = Contact.get(1)
-  @contact = $rolodex.find(params[:id].to_i)
+  @contact = Contact.get(params[:id].to_i)
   if @contact
     erb :show_contact
   else
     raise Sinatra::NotFound
-end
+  end
 end
 
 ["edit", "delete"].each do |action|
