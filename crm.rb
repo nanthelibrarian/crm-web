@@ -1,8 +1,18 @@
-require_relative 'rolodex'
+# require_relative 'rolodex'
 # require_relative 'contact'
 require 'sinatra'
 require 'sinatra/reloader'
 require 'data_mapper'
+require 'logger'
+
+# configure :development do
+#   set :logging, Logger::DEBUG
+# end
+
+before do
+  puts "-"*50
+  puts "PARAMS: #{params}"
+end
 
 DataMapper.setup(:default, 'sqlite3:database.sqlite3')
 
@@ -31,7 +41,7 @@ end
 # end
 
 
-$rolodex= Rolodex.new 
+# $rolodex= Rolodex.new 
 
 # $rolodex.add_contact(Contact.new("Johnny", "Bravo", "johnny@bitmakerlabs.com", "Rockstar"))
 
@@ -74,41 +84,59 @@ get "/contacts/:id" do
   end
 end
 
-["edit", "delete"].each do |action|
-	get "/contacts/:id/#{action}" do
-	  @contact = $rolodex.find(params[:id].to_i)
+
+
+
+get "/contacts/:id/edit" do
+	  @contact = Contact.get(params[:id].to_i)
+
 	  if @contact
-	    erb :"#{action}_contact"
+	    erb :edit_contact
 	  else
 	    raise Sinatra::NotFound
 	  end
-	end
 end
 
+
 put "/contacts/:id" do
-  @contact = $rolodex.find(params[:id].to_i)
+  @contact = Contact.get(params[:id].to_i)
   if @contact
     @contact.first_name = params[:first_name]
     @contact.last_name = params[:last_name]
     @contact.email = params[:email]
     @contact.notes = params[:notes]
-
-    redirect to("/contacts")
+    @contact.save
+    redirect to("/contacts/#{@contact.id}")
   else
     raise Sinatra::NotFound
   end
 end
 
+
+
+
+
+get "/contacts/:id/delete" do
+    @contact = Contact.get(params[:id].to_i)
+    if @contact
+      erb :delete_contact
+    else
+      raise Sinatra::NotFound
+    end
+end
 
 delete "/contacts/:id" do
-  @contact = $rolodex.find(params[:id].to_i)
+  @contact = Contact.get(params[:id].to_i)
   if @contact
-    $rolodex.remove_contact(@contact)
+    @contact.destroy 
     redirect to("/contacts")
   else
     raise Sinatra::NotFound
   end
 end
+
+
+
 
 
 # post '/contacts' do
