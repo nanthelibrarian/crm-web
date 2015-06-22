@@ -1,10 +1,30 @@
 require_relative 'rolodex'
-require_relative 'contact'
+# require_relative 'contact'
 require 'sinatra'
 require 'sinatra/reloader'
 require 'data_mapper'
 
 DataMapper.setup(:default, 'sqlite3:database.sqlite3')
+
+class Contact
+	include DataMapper::Resource
+
+	property :id, Serial
+	property :first_name, String
+	property :last_name, String
+	property :email, String
+	property :notes, String
+
+	# attr_accessor :id, :first_name, :last_name, :email, :notes
+
+	DataMapper.finalize
+	DataMapper.auto_upgrade!
+
+	def to_s
+		"#{first_name}, #{last_name}, #{email}, #{notes}"
+	end
+end
+
 
 # Class Contact
 # include DataMapper::Resource
@@ -29,6 +49,8 @@ get '/contacts' do
 	# @contacts << Contact.new("Keegan", "Dude", "keegan@dude.com", "the dude")
 	# @contacts << Contact.new("Nancy", "Wood", "nancy@librarian.com", "the librarian")
 
+	@contacts = Contact.all
+
 	erb :contacts
 	# - find contacts.erb
 	# - is there layout.erb
@@ -44,6 +66,8 @@ get '/contacts/new' do
 end
 
 get "/contacts/:id" do
+
+	# @contact = Contact.get(1)
   @contact = $rolodex.find(params[:id].to_i)
   if @contact
     erb :show_contact
@@ -89,8 +113,24 @@ delete "/contacts/:id" do
 end
 
 
-post '/contacts' do
-  new_contact = Contact.new(params[:first_name], params[:last_name], params[:email], params[:note])
-  $rolodex.add_contact(new_contact)
+# post '/contacts' do
+#   new_contact = Contact.new(params[:first_name], params[:last_name], params[:email], params[:note])
+#   $rolodex.add_contact(new_contact)
+#   redirect to('/contacts')
+# end
+
+get "/contacts" do
+  @contacts = Contact.all
+  erb :contacts
+end
+
+post "/contacts" do
+  contact = Contact.create(
+    :first_name => params[:first_name],
+    :last_name => params[:last_name],
+    :email => params[:email],
+    :notes => params[:notes]
+  )
   redirect to('/contacts')
 end
+
